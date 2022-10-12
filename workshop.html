@@ -6,6 +6,24 @@
     <title>Real world fetch</title>
   </head>
   <body>
+    <form
+      id="form"
+      action="https://learn-forms.netlify.com/submit/part3"
+      method="GET"
+    >
+      <fieldset>
+        <legend>Contact Us</legend>
+
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text" required />
+
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" required />
+
+        <button type="submit">Submit</button>
+      </fieldset>
+    </form>
+
     <script>
       // HTTP errors. Challenge One
 
@@ -41,6 +59,11 @@
       //   .catch(console.error);
 
       // User Input
+
+      const myForm = document.querySelector("form");
+
+      myForm.addEventListener("submit", event => {
+      event.preventDefault();
     </script>
   </body>
 </html>
