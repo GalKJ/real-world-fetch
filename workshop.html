@@ -61,12 +61,31 @@
       // User Input
 
       const myForm = document.querySelector('form');
-      const name = document.querySelector('#name');
-      const email = document.querySelector('#email');
 
       myForm.addEventListener('submit', (event) => {
         event.preventDefault();
+
+        const name = document.querySelector('#name').value;
+        const email = document.querySelector('#email').value;
+
+        fetch('https://echo.oliverjam.workers.dev/json', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name: name,
+            email: email,
+          }),
+        })
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => console.log(data))
+          .catch(console.error);
       });
+
+      // New Form Data
     </script>
   </body>
 </html>
