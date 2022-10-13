@@ -6,21 +6,21 @@
     <title>Real world fetch</title>
   </head>
   <body>
-    <form
-      id="form"
-      action="https://learn-forms.netlify.com/submit/part3"
-      method="GET"
-    >
+    <form id="form">
       <fieldset>
         <legend>Contact Us</legend>
 
-        <label for="name">Name</label>
+        <!-- <label for="name">Name</label>
         <input id="name" name="name" type="text" required />
 
         <label for="email">Email</label>
-        <input id="email" name="email" type="email" required />
+        <input id="email" name="email" type="email" required /> -->
+
+        <label for="search">Search</label>
+        <input id="search" name="search" type="search" required />
 
         <button type="submit">Submit</button>
+        <output></output>
       </fieldset>
     </form>
 
@@ -87,31 +87,55 @@
 
       // New Form Data
 
+      // const myForm = document.querySelector('form');
+
+      // myForm.addEventListener('submit', (event) => {
+      //   event.preventDefault();
+
+      //   const name = document.querySelector('#name').value;
+      //   const email = document.querySelector('#email').value;
+
+      //   const newForm = new FormData(myForm);
+      //   const data = Object.fromEntries(newForm);
+
+      //   fetch('https://echo.oliverjam.workers.dev/json', {
+      //     method: 'POST',
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //     },
+      //     body: JSON.stringify({
+      //       data,
+      //     }),
+      //   })
+      //     .then((response) => {
+      //       return response.json();
+      //     })
+      //     .then((data) => console.log(data))
+      //     .catch(console.error);
+      // });
+
+      // Pokemon workshop
+
       const myForm = document.querySelector('form');
+      const output = document.querySelector('output');
 
       myForm.addEventListener('submit', (event) => {
         event.preventDefault();
 
-        const name = document.querySelector('#name').value;
-        const email = document.querySelector('#email').value;
+        // const search = document.querySelector('#name').value;
 
         const newForm = new FormData(myForm);
-        const data = Object.fromEntries(newForm);
+        // const pokeData = Object.fromEntries(newForm);
+        const pokeName = newForm.get('search');
+        console.log(pokeName);
 
-        fetch('https://echo.oliverjam.workers.dev/json', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            data,
-          }),
-        })
+        fetch(`https://pokeapi.co/api/v2/pokemon/${pokeName}`)
           .then((response) => {
             return response.json();
           })
-          .then((data) => console.log(data))
-          .catch(console.error);
+          .then((pokeData) => {
+            console.log(pokeData);
+          });
       });
     </script>
   </body>
